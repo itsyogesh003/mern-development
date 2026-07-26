@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Optimized Japa Mala Simulator</title>
+<style>
+  body {
+    margin: 0;
+    overflow: hidden;
+    background: radial-gradient(circle, #2c3e50, #000000);
+    font-family: sans-serif;
+    color: #ecf0f1;
+    touch-action: none; 
+  }
+
+  #ui-layer {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    pointer-events: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 40px 0;
+    box-sizing: border-box;
+    z-index: 10;
+  }
+
+  #counter { text-align: center; }
+  #count { font-size: 5rem; font-weight: bold; color: #f1c40f; text-shadow: 0 0 15px rgba(241, 196, 15, 0.4); }
+  #total { font-size: 1.5rem; color: #bdc3c7; }
+
+  #thumb-zone {
+    position: absolute;
+    top: 50%; left: 50%; width: 90px; height: 90px;
+    transform: translate(-50%, -50%);
+    border: 2px dashed rgba(241, 196, 15, 0.4);
+    border-radius: 50px;
+    background: radial-gradient(circle, rgba(241,196,15,0.08), transparent);
+  }
+
+  #flip-overlay {
+    display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.85); z-index: 20;
+    flex-direction: column; justify-content: center; align-items: center;
+    pointer-events: auto;
+  }
+
+  #flip-btn {
+    background: #f1c40f; color: #000; font-weight: bold;
+    padding: 15px 40px; font-size: 1.2rem; border: none; border-radius: 5px; cursor: pointer;
+  }
+</style>
+</head>
+
+<body>
+<div id="thumb-zone"></div>
+<div id="ui-layer">
+  <div id="counter">
+    <div id="count">0</div>
+    <div id="total">/ 108</div>
+  </div>
+</div>
+
+<div id="flip-overlay">
+  <h2 style="color:#e74c3c">Guru Bead Reached</h2>
+  <p>Do not cross the Meru.</p>
+  <button id="flip-btn">Flip Mala</button>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+
+<script>
+  const totalBeads = 108;
+  let currentCount = 0;
+  let isFlipped = false;
+  let needsUpdate = true; // Control flag for On-Demand Rendering
+
+  // 1. Scene Setup
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(45, window.innerWidth/window.innerHeight, 0.1, 1000);
+  camera.position.set(0, 0, 42); 
+
+  const renderer = new THREE.WebGLRenderer({antialias: true, alpha: true});
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2)); // Limit pixel ratio for performance
+  document.body.appendChild(renderer.domElement);
+
+  scene.add(new THREE.AmbientLight(0xffeedd, 0.8));
+  const light = new THREE.DirectionalLight(0xffeedd, 1.0);
+  light.position.set(10, 20, 15);
+  scene.add(light);
+
+  const malaGroup = new THREE.Group();
+  scene.add(malaGroup);
+
+  // 2. Optimized Asset Loading
+  const loader = new THREE.TextureLoader();
+  // REPLACE THESE URLS WITH YOUR OWN PHOTO PATHS
+  const beadTex = loader.load('https://raw.githubusercontent.com/mrdoob/three.js/master/examples/textures/planets/earth_atmos_2048.jpg', () => { requestUpdate(); });
+  
+  const woodMat = new THREE.MeshStandardMaterial({ map: beadTex, roughness: 0.8 });
+  const guruMat = new THREE.MeshStandardMaterial({ color: 0xc0392b, roughness: 0.6 });
+
+  // Slashing polygon count: from 32x32 to 16x12
+  const beadGeo = new THREE.SphereGeometry(0.8, 16, 12);
+  const guruGeo = new THREE.SphereGeometry(1.2, 16, 12);
+
+  const beads = [];
+  const stringPoints = [];
+  const radiusY = 45; 
+  const radiusZ = 15; 
+
+  for(let i = 0; i < totalBeads; i++) {
+    let bead = new THREE.Mesh(i === 0 ? guruGeo : beadGeo, i === 0 ? guruMat : woodMat);
+    malaGroup.add(bead);
+    beads.push(bead);
+    stringPoints.push(new THREE.Vector3());
+  }
+  stringPoints.push(new THREE.Vector3()); 
+  const stringLine = new THREE.Line(new THREE.BufferGeometry(), new THREE.LineBasicMaterial({ color: 0x3a1f0f, linewidth: 2 }));
+  malaGroup.add(stringLine);
+
+  // 3. Logic & Input
+  let currentOffsetAngle = 0, targetOffsetAngle = 0, targetGroupRotationY = 0;
+  const rotationStep = (Math.PI * 2) / totalBeads;
+  let gestureLocked = false, startY = 0, wheelTimeout;
+
+  function requestUpdate() { needsUpdate = true; }
+
+  document.getElementById('flip-btn').addEventListener('click', () => {
+    document.getElementById('flip-overlay').style.display = 'none';
+    currentCount = 0;
+    document.getElementById("count").innerText = currentCount;
+    isFlipped = !isFlipped; 
+    targetGroupRotationY += Math.PI * 2; 
+    targetOffsetAngle = 0;
+    currentOffsetAngle = 0;
+    requestUpdate();
+  });
+
+  window.addEventListener("touchstart", (e) => { startY = e.touches[0].clientY; gestureLocked = false; });
+  window.addEventListener("touchmove", (e) => {
+    if(gestureLocked || currentCount >= totalBeads) return;
+    if((e.touches[0].clientY - startY) > 30) { pullBead(); gestureLocked = true; }
+  }, { passive: false });
+
+  window.addEventListener("wheel", (e) => {
+    clearTimeout(wheelTimeout);
+    wheelTimeout = setTimeout(() => { gestureLocked = false; }, 150);
+    if(!gestureLocked && currentCount < totalBeads && e.deltaY > 5) { pullBead(); gestureLocked = true; }
+  });
+
+  function pullBead() {
+    currentCount++;
+    document.getElementById("count").innerText = currentCount;
+    targetOffsetAngle += rotationStep;
+    if(navigator.vibrate) navigator.vibrate(25);
+    if(currentCount === totalBeads) setTimeout(() => { document.getElementById('flip-overlay').style.display = 'flex'; }, 300);
+    requestUpdate();
+  }
+
+  // 4. Optimized Render Loop (Only renders when needed)
+  function animate() {
+    requestAnimationFrame(animate);
+    
+    // Check if animation is still moving
+    const angleDiff = Math.abs(targetOffsetAngle - currentOffsetAngle);
+    const rotDiff = Math.abs(targetGroupRotationY - malaGroup.rotation.y);
+    
+    if (angleDiff > 0.001 || rotDiff > 0.001 || needsUpdate) {
+      currentOffsetAngle += (targetOffsetAngle - currentOffsetAngle) * 0.1;
+      malaGroup.rotation.y += (targetGroupRotationY - malaGroup.rotation.y) * 0.08;
+
+      for(let i = 0; i < totalBeads; i++) {
+        let mappedIndex = isFlipped ? (totalBeads - i) % totalBeads : i;
+        let animatedAngle = (Math.PI / 2) - (mappedIndex / totalBeads) * Math.PI * 2 + currentOffsetAngle; 
+        beads[i].position.set(Math.sin(animatedAngle * 4) * 0.3, Math.cos(animatedAngle) * radiusY, Math.sin(animatedAngle) * radiusZ);
+        stringPoints[i].copy(beads[i].position);
+      }
+      stringPoints[totalBeads].copy(stringPoints[0]);
+      stringLine.geometry.setFromPoints(stringPoints);
+      
+      renderer.render(scene, camera);
+      needsUpdate = (angleDiff > 0.001 || rotDiff > 0.001);
+    }
+  }
+  animate();
+
+  window.addEventListener("resize", () => {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    requestUpdate();
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,784 @@
+
+<!-- code explainationa: 
+
+1]  https://chatgpt.com/share/687e45d2-6630-8006-b5eb-1a7cce7142a4
+
+2]https://chatgpt.com/share/687e4641-6bd0-8006-a74e-50df0ab5b203 -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amazon</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        * {
+    margin: 0;
+    font-family: Arial;
+    border: border-box;
+}
+
+
+nav{
+    height: 120px;
+    width: 100%;
+    position: sticky;
+    top: 0px;
+
+/*navebar*/
+/*box1*/
+.navbar {
+    height: 70px;
+    background-color: #0f1111;
+    color: white;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+   
+   
+}
+
+.nav-logo {
+    height:60px;
+    width: 210px;
+}
+
+.logo {
+    background-image: url("img/Amazon-Logo.png");
+    background-size: cover;
+    height: 60px;
+    width: 100%;
+}
+
+.border {
+    border: 1.5px solid transparent;
+}
+
+.border:hover {
+    border: 1.5px solid white;
+}
+
+/*box 2*/
+.nav-address {
+    height: 60px;
+    width: 80px;
+}
+
+.Dt {
+    color: #cccccc;
+    font-size: 0.85rem;
+    margin-left: 15px;
+}
+
+.ind {
+    font-size: 1.5rem;
+    margin-left: 3px;
+}
+
+.add-icon {
+    display: flex;
+    align-items: center;
+
+}
+
+/*box3*/
+.nave-search {
+
+    height: 40px;
+    width: 600px;
+    display: flex;
+    border-radius: 5px;
+    justify-content: space-evenly;
+
+}
+
+.search {
+    height: 40px;
+    width: 100%;
+    border: none;
+    font-size: 1rem;
+}
+
+.search-select {
+    width: 50px;
+    height: 40px;
+    border: none;
+    background-color: #f1f1f1;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+.search-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    border: none;
+    font-size: 1.2rem;
+    color: #0f1111;
+    background-color: rgba(255, 169, 64, 0.969);
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+
+}
+
+.nave-search:hover {
+    border: 2px solid rgba(255, 169, 64, 0.969);
+}
+  
+ /*box4*/
+.contry {
+    display: flex;
+    height: 50px;
+    width: 30;
+    background-color: #0f1111;
+    justify-content: center;
+    align-items: center;
+}
+
+.selectcontry {
+    height: 50px;
+    max-width: 80px;
+    background-color: #0f1111;
+    color: white;
+    font-weight: 700;
+    display: flex;
+    border: none;
+}
+
+.img-ind {
+    height: 10px;
+    width: 20px;
+}
+
+/*box4&5*/
+.signin{
+    align-items: center;
+    justify-content: center;
+}
+
+.selectacocount{
+    background-color: #0f1111;
+    border: none;
+    color: white;
+    font-weight: 500;
+    font-size: 1rem;
+}
+
+/*box6*/
+.nav-cart i {
+    font-size: 30px;
+}
+
+.nav-cart{
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+}
+
+/*pannel*/
+.pannel{
+    height: 50px;
+    background-color: #4e5f72;
+    display: flex; 
+    align-items: center;
+   
+}
+
+.pannel-all{
+    font-weight: 500;
+    display: flex;
+    width: 80px;
+    margin-left: 20px;
+    color: white;
+    font-size: 1.50rem;
+}
+
+.pannel-option{
+    display: flex;
+    width: 900px;
+    color: white;
+}
+
+.pannel-ops{
+    margin-left: 50px;
+}
+
+.pannel-deals{
+    margin-right: 20px;
+    display: flex;
+    color: white;
+    font-size: 1.50rem;
+    width: 600px;
+    justify-content: right;
+}
+
+.background{
+    background-image: url("img/background.jpg");
+    height: 400px;
+    width: 100%;
+    background-size: cover;
+    display: flex;
+    align-items: end;
+    justify-content: space-evenly;
+   
+}
+
+.message{
+    background-color: white;
+    color: black;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 90%;
+    margin-bottom: 30px;
+    font-size: 0.85rem;
+}
+
+.shop-section{
+    height: 1600px;
+    background-color:rgb(86, 64, 214);
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.shop-background{
+    height: 450px;
+    width: 98%;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.shop-div{
+    height: 100%;
+    width: 400px;
+    background-color:white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+   
+}
+
+
+
+.first3div{
+    margin-right: 20px;
+}
+
+.gaming-div-img{
+    height: 300px;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-left: 20px;
+}
+   
+.subshop-row{
+    display: flex;
+    justify-content: space-evenly;
+}
+.sub-shop{
+    height: 150px;
+    width: 150px;
+    background-size:120%;
+    display: flex;
+    align-items: end;
+}
+
+.sub-shop h4{
+    height: 37px;
+    background-color: white;
+    width: 100%;
+}
+
+.shop-div-img{
+    height: 300px;
+    width: 90%;
+    background-size: cover;
+    margin-left: 20px;
+}
+
+.pannel-shop{
+    height: 250px;
+    width: 98%;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    
+}
+
+a{
+    color: blue;
+    text-decoration: none;
+
+}
+
+.pannel-shop-images{
+    display: flex;
+    width: 100%;
+    height: 200px;
+    justify-content: space-evenly;
+}
+
+.toys-games{
+    height: 100%;
+    width: 200px;
+    background-size: cover;
+
+}
+
+.shop4{
+    margin-top: 23px;
+    width: 100%;
+}
+
+.mob{
+   margin-left: 20px;
+}
+
+
+/*footer*/
+
+.pannel-1{
+    height: 180px;
+    
+}
+
+.innpan1{
+    height: 150px;
+    background-color: white;
+    border-top: 0.5px solid black;  
+    border-bottom: 0.5px solid black;  
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+.innpan1-p{ 
+    font-size: o.85rem;
+}
+
+.immpan1-button{
+    width: 250px;
+    background-color: rgb(237 176 63);
+    height: 30px;
+    border: 1px solid orange;
+    border-radius: 8px;
+    font-size: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.pannel-2{
+    height: 50px;
+    background-color:#4e5f72; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.pannel-2 a{
+    color: white;
+}
+
+.pannel-3m{
+    height: 500px;
+    width: 100%;
+    background-color: #303a45;
+  
+}
+
+.pannel-3{
+    height: 300px;
+    width: 100%;
+   
+    display: flex;
+    justify-content: space-evenly;
+}
+
+ul{
+    margin-top: 60px;
+}
+
+.pan3p{
+    color: white;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+li{
+   margin-top: 10px; 
+}
+
+.pan3a{
+    color: rgba(255, 255, 255, 0.704);
+}
+
+.amazon-logo-pan{
+    height: 200px;
+    border-top: 0.2px solid white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+img{
+    height: 80px;
+}
+
+.pannel-4{
+    background-color: #0f1111;
+    height: 100px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
+pre a{
+    color: white;
+}
+
+pre a:hover{
+    color:blue;
+    text-decoration: underline;
+}
+
+    </style>
+    
+</head>
+
+<body>
+    
+
+        <!-- navbar -->
+        <nav>
+            
+            <div class="navbar">
+                
+                <div class="nav-logo border">
+                    <div class="logo ">
+                    </div>
+            </div>
+
+            <div class="nav-address border">
+                <p class="Dt">Deliver to</p>
+                <div class="add-icon">
+                    <i class="fa-solid fa-location-dot"></i>
+                    <p class="ind">India</p>
+                </div>
+            </div>
+            
+            <div class="nave-search border">
+                <select class="search-select">
+                    <option value="all">All</option>
+                </select>
+                <input type="search" class="search" placeholder="Search Amazon">
+                <div class="search-icon">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </div>
+            </div>
+            
+            <div class="contry border">
+                <img src="img/imdIND.png" class="img-ind" alt="img india">
+                <select class="selectcontry">
+                    <option value="">
+                        <span>ENGLISH</span>
+                    </option>
+                    <option value="">
+                        <span>HINDI</span>
+                    </option>
+                    <option value="">
+                        <span>MARATHI</span>
+                    </option>
+                </select>
+            </div>
+            
+            <div class="signin border">
+                <p class="Dt">Hello, Sing In</p>
+                <select class="selectacocount">
+                    <option>
+                        Account & Lists
+                    </option>
+                </select>
+            </div>
+
+            <div class="return border">
+                <p class="Dt">Return</p>
+                <p class="selectacocount">
+                    & Order
+                </p>
+            </div>
+            
+            <div class="nav-cart border">
+                <i class="fa-solid fa-cart-shopping"></i>
+                Cart
+            </div>
+        </div>
+        
+            <!-- pannel section -->
+             <div class="pannel">
+                
+                <div class="pannel-all">
+                <i class="fa-solid fa-bars"></i>
+             All
+                
+            </div> 
+
+            <div class="pannel-option">
+                <p class="pannel-ops border">Today's Deals</p>
+                <p class="pannel-ops border">Costomer Service</p>
+                <p class="pannel-ops border">Registry</p>
+                <p class="pannel-ops border">Gift Cards</p>
+                <p class="pannel-ops border">Sells</p>
+            </div>
+            
+            <div class="pannel-deals">
+                Shop Deals in Electronics
+            </div>
+            
+        </div>
+    </nav>
+   
+
+        <!-- background sectiion -->
+        <div class="background">
+            <div class="message" >
+                <p style="font-size: 20px;">You are on amazon.com. You can also shop on Amazon India for millions of products with fast local 
+                    <a href="#" target="_blank" >click here to go to amazon.in
+                    </a>
+                </p>
+            </div>
+        </div> 
+    
+
+    
+    <!-- shop section -->
+     <div class="shop-section">
+        <!-- shop 1 -->
+        <div class="shop1 shop-background">
+            <div class="shop-div first3div">
+                <h1>Laptops for every need</h1><br>
+                <div class="shop-div-img" style="background-image:url('img/laptops\ for\ every\ need.jpg')"></div>
+                <p> <a href="#" target="_blank">see more</a></p>
+            </div>
+
+            <div class="shop-div first3div">
+                <h1>Shop activety trackers and smartwatches</h1>
+                <div class="shop-div-img" style="background-image:url('img/shop\ activity\ trackers\ and\ smartwatches.jpg')"></div>
+                <p> <a href="#" target="_blank">shop now</a></p>
+            </div>
+            <div class="shop-div first3div">
+                <h1>Shop deals in fashion</h1><br>
+                <div class="gaming-div-img">
+                    <div class="subshop-row">
+                    <div class="sub-shop" style="background-image: url('img/shop\ deals\ in\ fashion\ 1.jpg');"><h4> jeans under $50</h4></div>
+                    <div class="sub-shop" style="background-image: url('img/shop\ deals\ in\ fashion\ 2.jpg');"><h4> tops under $25</h4></div>
+                </div>
+                <div class="subshop-row">
+                    <div class="sub-shop" style="background-image: url('img/shop\ deals\ in\ fashion\ 3.jpg');"><h4> dresses under $30</h4></div>
+                    <div class="sub-shop" style="background-image: url('img/shop\ deals\ in\ fashion\ 4.jpg');"><h4> shoes under $50</h4></div>
+                </div>
+            </div>
+                <p> <a href="#" target="_blank">see all deals</a></p>
+            </div>
+            <div class="shop-div ">
+                <h1>Upgrade your office furniture</h1>
+                <div class="shop-div-img" style="background-image:url('img/upgrade\ your\ office\ furniture.jpg')"></div>
+                <p> <a href="#" target="_blank">shop now</a></p>
+            </div>
+        </div>
+
+        <!-- shop 2 -->
+        <div class="shop-background">
+
+            <div class="shop-div first3div">
+                <h1>Gaming Accessories</h1><br>
+                <div class="gaming-div-img">
+                    <div class="subshop-row">
+                    <div class="sub-shop" style="background-image: url('img/gaming.jpg');"><h4> Keyboards</h4></div>
+                    <div class="sub-shop" style="background-image: url('img/gaming1.jpg');"><h4> Headsets</h4></div>
+                </div>
+                <div class="subshop-row">
+                    <div class="sub-shop" style="background-image: url('img/gaming3.jpg');"><h4> Computer mice</h4></div>
+                    <div class="sub-shop" style="background-image: url('img/gaming2.jpg');"><h4> Chairs</h4></div>
+                </div>
+            </div>
+                <p> <a href="#" target="_blank">see more</a></p>
+            </div>
+
+            <div class="shop-div first3div">
+                <h1>Player's paradise starts here</h1>
+                <div class="shop-div-img" style="background-image:url('img/player\'s\ paradise\ starts\ here.jpg')"></div>
+                <p> <a href="#" target="_blank">Shop video games</a></p>
+            </div>
+
+            <div class="shop-div first3div">
+                <h1>Deals in PCs</h1><br>
+                <div class="shop-div-img" style="background-image:url('img/deals\ in\ pcs.jpg')"></div>
+                <p> <a href="#" target="_blank">see more</a></p>
+            </div>
+
+            <div class="shop-div ">
+                <h1>Electronics and Accessories</h1>
+                <div class="shop-div-img" style="background-image:url('img/electronics\ and\ accessories.jpg')"></div>
+                <p> <a href="#" target="_blank">see more</a></p>
+            </div>
+        </div>
+            <!-- shop 3 -->
+            <div class="pannel-shop">
+                 <h1>Best Sellers in Toys and Games</h1>
+                <div class="pannel-shop-images">
+                    <div class="toys-games" style="background-image: url('img/best\ sellers\ in\ toys\ and\ games.jpg');"></div>
+                        <div class="toys-games" style="background-image: url('img/best\ sellers\ in\ toys\ and\ games\ 1.jpg');"></div>
+                             <div class="toys-games" style="background-image: url('img/best\ sellers\ in\ toys\ and\ games\ 2.jpg');"></div>
+                                <div class="toys-games" style="background-image: url('img/best\ sellers\ in\ toys\ and\ games\ 3.jpg');"></div>
+                                    <div class="toys-games" style="background-image: url('img/best\ sellers\ in\ toys\ and\ games\ 4.jpg');"></div>
+                 </div>
+            <p> <a href="#" target="_blank">see more</a></p>     
+         </div>
+            <!-- shop 4 -->
+         <div class=" shop4 shop-background">
+
+            <div class="shop-div mob first3div">
+                <h1>Gaming Merchandise</h1><br>
+                <div class="gaming-div-img">
+                    <div class="subshop-row">
+                    <div class="sub-shop" style="background-image: url('img/gaming\ merchandise.jpg');"><h4> Apparel</h4></div>
+                    <div class="sub-shop" style="background-image: url('img/gaming\ merchandise1.jpg');"><h4> Hats</h4></div>
+                </div>
+                <div class="subshop-row">
+                    <div class="sub-shop" style="background-image: url('img/gaming\ merchandise2.jpg');"><h4>Action Figure</h4></div>
+                    <div class="sub-shop" style="background-image: url('img/gaming\ merchandise3.jpg');"><h4> Mugs</h4></div>
+                </div>
+            </div>
+                <p> <a href="#" target="_blank">see more</a></p>
+            </div>
+
+            <div class="shop-div  first3div">
+                <h1>Amazon Brands and More</h1><br>
+                <div class="gaming-div-img">
+                    <div class="subshop-row">
+                    <div class="sub-shop" style="background-image: url('img/amazon\ brands\ and\ more.jpeg');"><h4> Men's Clothing</h4></div>
+                    <div class="sub-shop" style="background-image: url('img/amazon\ brands\ and\ more\ 1.jpeg');"><h4> Kid's Clothing</h4></div>
+                </div>
+                <div class="subshop-row">
+                    <div class="sub-shop" style="background-image: url('img/amazon\ brands\ and\ more\ 2.jpeg');"><h4>Shoe</h4></div>
+                    <div class="sub-shop" style="background-image: url('img/amazon\ brands\ and\ more\ 4.jpeg');"><h4> Women's Clothing</h4></div>
+                </div>
+            </div>
+                <p> <a href="#" target="_blank">see more</a></p>
+            </div>
+
+            <div class="shop-div first3div ">
+                <h1>Deals on  Mobiles and Accessories</h1><br>
+                <div class="shop-div-img" style="background-image:url('img/deals\ on\ mobiles\ and\ accessories.jpg')"></div>
+                <p> <a href="#" target="_blank">see more</a></p>
+            </div>
+
+            <div class="shop-div first3div">
+                <h1>Letest Trends form Top Brands</h1><br>
+                <div class="gaming-div-img">
+                    <div class="subshop-row">
+                    <div class="sub-shop" style="background-image: url('img/latest\ trends\ from\ top\ brands\ 1.jpg');"><h4> Kurtas</h4></div>
+                    <div class="sub-shop" style="background-image: url('img/latest\ trends\ from\ top\ brands\ 2.jpg');"><h4> Tops</h4></div>
+                </div>
+                <div class="subshop-row">
+                    <div class="sub-shop" style="background-image: url('img/latest\ trends\ from\ top\ brands\ 3.jpg');"><h4>Dresses</h4></div>
+                    <div class="sub-shop" style="background-image: url('img/latest\ trends\ from\ top\ brands\ 4.jpg');"><h4>Sarees</h4></div>
+                </div>
+            </div>
+                <p> <a href="#" target="_blank">see more</a></p>
+            </div>
+        </div>
+    </div>
+  
+     <footer>
+        <div class="pannel-1">
+            <div class="innpan1">
+                <p class="immpan1-p">See personalized recommendations</p>
+                <button class="immpan1-button">Sing in</button>
+                <p class="immpan1-p">New customer?<a href="#">Start here.</a> </p>
+            </div>
+
+        </div>
+        <div class="pannel-2">
+            <a href="#">back to top</a>
+        </div>
+        
+        <div class="pannel-3m">
+            <div class="pannel-3">
+                <ul type="none">
+                    <p class="pan3p">Get to Know Us</p>
+                  
+                        <li><a class="pan3a" href="#">Careers</a></li>
+                        <li><a class="pan3a" href="#">Blog</a></li>
+                        <li><a class="pan3a" href="#"> Amazon</a></li>
+                        <li><a class="pan3a" href="#">Investor Relations</a></li>
+                        <li><a class="pan3a" href="#">Amazon Devices</a></li>
+                        <li><a class="pan3a" href="#">Amazon Science</a></li>
+                </ul>
+    
+                <ul type="none">
+                    <p class="pan3p">Get to Know Us</p>
+                  
+                        <li><a class="pan3a" href="#">Careers</a></li>
+                        <li><a class="pan3a" href="#">Blog</a></li>
+                        <li><a class="pan3a" href="#"> Amazon</a></li>
+                        <li><a class="pan3a" href="#">Investor Relations</a></li>
+                        <li><a class="pan3a" href="#">Amazon Devices</a></li>
+                        <li><a class="pan3a" href="#">Amazon Science</a></li>
+                </ul>
+    
+                <ul type="none">
+                    <p class="pan3p">Get to Know Us</p>
+                  
+                        <li><a class="pan3a" href="#">Careers</a></li>
+                        <li><a class="pan3a" href="#">Blog</a></li>
+                        <li><a class="pan3a" href="#"> Amazon</a></li>
+                        <li><a class="pan3a" href="#">Investor Relations</a></li>
+                        <li><a class="pan3a" href="#">Amazon Devices</a></li>
+                        <li><a class="pan3a" href="#">Amazon Science</a></li>
+                </ul>
+    
+                <ul type="none">
+                    <p class="pan3p">Get to Know Us</p>
+                  
+                        <li><a class="pan3a" href="#">Careers</a></li>
+                        <li><a class="pan3a" href="#">Blog</a></li>
+                        <li><a class="pan3a" href="#"> Amazon</a></li>
+                        <li><a class="pan3a" href="#">Investor Relations</a></li>
+                        <li><a class="pan3a" href="#">Amazon Devices</a></li>
+                        <li><a class="pan3a" href="#">Amazon Science</a></li>
+                </ul>
+            </div>
+            
+            <div class="amazon-logo-pan">
+                <img src="img/Amazon-Logo.png" alt="amazon"> 
+                <div class="logopan"></div>
+             </div>
+        </div>
+              
+              
+        <div class="pannel-4">
+            <pre><a href="#">Privacy Notice</a>         <a href="#">Consumer Health Data Privacy Disclosure</a>        <a href="#">Your Ads Privacy Choices</a>
+
+                            © 1996-2024, Amazon.com, Inc. or its affiliates</pre>
+        </div>
+    </footer>
+</body>
+
+</html> 
