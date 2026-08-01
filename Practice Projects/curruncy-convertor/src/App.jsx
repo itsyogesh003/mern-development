@@ -8,7 +8,6 @@ function App() {
   const [fromCurrency, setFromCurrency] = useState('USD')
   const [toCurrency, setToCurrency] = useState('INR')
   const [amount, setAmount] = useState(1)
-  const [result, setResult] = useState(null)
 
 
   useEffect(() => {
@@ -25,16 +24,10 @@ function App() {
       })
   }, [fromCurrency])
 
-  useEffect(()=>{
-    if(!rates || !rates[toCurrency]){
-      // eslint-disable-next-line react-hooks/set-state-in-effect
-      setResult(null)
-      return
-    }
-
+  
     const rate = rates[toCurrency]
-    setResult((amount * rate).toFixed(2))
-  },[rates, toCurrency,amount])
+    const result = rate && amount?(amount * rate).toFixed(2): null
+  
 
   const handleSwap = ()=>{
     setFromCurrency(toCurrency)
@@ -45,7 +38,7 @@ function App() {
     <>
       <div className='bg-gray-100 p-4 flex justify-center items-center min-h-screen'>
         <div className='bg-white shadow-lg rounded-lg p-6 w-full max-w-md'>
-          <h1 className="text-2xl font-bold mb-4 text-center">Currency Convertor</h1>
+          <h1 className="text-2xl font-bold mb-4 text-center">Currency Converter</h1>
           <input
             value={amount}
             onChange={(e) => setAmount(e.target.value)}
