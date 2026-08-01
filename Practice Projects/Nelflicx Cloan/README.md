@@ -3,7 +3,7 @@
 A static front-end clone of the Netflix India landing page, built with HTML and CSS to replicate the visual layout and responsive behavior of the original site.
 
 ## 🔗 Live Demo
-[View the live project here](https://roaring-jalebi-55afdb.netlify.app/)
+[View the live project here](https://streming-site-clone-yogesh23.netlify.app/)
 
 ## 🔗 Overview
 This project is a structural and visual replication of the unauthenticated Netflix India homepage. It includes responsive design adjustments across multiple breakpoints, layout structuring, and embedded media elements to mimic the live user experience.
